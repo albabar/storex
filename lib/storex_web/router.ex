@@ -18,6 +18,7 @@ defmodule StorexWeb.Router do
 
 #    get "/", PageController, :index
     get "/", BookController, :index
+    get "/books/:id", BookController, :show
   end
 
   # Other scopes may use custom stacks.

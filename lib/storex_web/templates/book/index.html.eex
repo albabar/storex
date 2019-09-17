@@ -1,47 +1,16 @@
 <section class="book-list">
   <ul class="grid">
-    <li class="grid-item">
-      <div class="book book-small">
-        <a href="#">
-          <img class="book__image"
-            src="http://www.phoenixforrailsdevelopers.com/books/1.png">
-          <h2 class="book__title">My first book</h2>
-        </a>
-        <span class="book__price">$ 15.90</span>
-      </div>
-    </li>
-
-    <li class="grid-item">
-      <div class="book book-small">
-        <a href="#">
-          <img class="book__image"
-            src="http://www.phoenixforrailsdevelopers.com/books/2.png">
-          <h2 class="book__title">My second book</h2>
-        </a>
-        <span class="book__price">$ 25.90</span>
-      </div>
-    </li>
-
-    <li class="grid-item">
-      <div class="book book-small">
-        <a href="#">
-          <img class="book__image"
-            src="http://www.phoenixforrailsdevelopers.com/books/3.png">
-          <h2 class="book__title">My third book</h2>
-        </a>
-        <span class="book__price">$ 35.90</span>
-      </div>
-    </li>
-
-    <li class="grid-item">
-      <div class="book book-small">
-        <a href="#">
-          <img class="book__image"
-            src="http://www.phoenixforrailsdevelopers.com/books/4.png">
-          <h2 class="book__title">My fourth book</h2>
-        </a>
-        <span class="book__price">$ 45.90</span>
-      </div>
-    </li>
+    <%= for book <- @books do %>
+        <li class="grid-item">
+          <div class="book book-small">
+            <%= link to: Routes.book_path(@conn, :show, book.id) do %>
+              <img class="book__image"
+                src="<%= book.image_url %>">
+              <h2 class="book__title"><%= book.title %></h2>
+            <% end %>
+            <span class="book__price">$ <%= book.price %></span>
+          </div>
+        </li>
+    <% end %>
   </ul>
 </section>
