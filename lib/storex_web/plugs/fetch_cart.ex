@@ -1,4 +1,4 @@
-defmodule StorexWeb.Plugs.Cart do
+defmodule StorexWeb.Plugs.FetchCart do
   import Plug.Conn
   alias Storex.Sales
 
@@ -18,10 +18,18 @@ defmodule StorexWeb.Plugs.Cart do
   end
 
   def get(conn) do
-    conn.assigns(@assign_name)
+    conn.assigns[@assign_name]
   end
 
   def forget(conn) do
     delete_session(conn, @session_name)
+  end
+
+  def items_count(conn) do
+    conn |> get |> Storex.Sales.line_items_count
+  end
+
+  def total_price(conn) do
+    conn |> get |> Storex.Sales.line_items_total_price
   end
 end

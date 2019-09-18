@@ -12,6 +12,15 @@
 <body>
   <nav class="main-nav">
     <a class="main-nav__logo" href="/"></a>
+    <ul class="main-nav__links">
+      <%= if items_count(@conn) do %>
+        <li>
+          <%= link to: Routes.cart_path(@conn, :show) do %>
+            cart <span class="badge"><%= items_count(@conn) %> (<%= format_price(items_total_price(@conn)) %>)</span>
+          <% end %>
+        </li>
+        <% end %>
+    </ul>
   </nav>
 
   <main class="content">

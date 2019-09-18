@@ -41,6 +41,7 @@ defmodule StorexWeb do
 
       import StorexWeb.ErrorHelpers
       import StorexWeb.Gettext
+      import StorexWeb.Helpers.PriceFormatter
       alias StorexWeb.Router.Helpers, as: Routes
     end
   end
