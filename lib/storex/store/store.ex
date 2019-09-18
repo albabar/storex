@@ -11,6 +11,6 @@ defmodule Storex.Store do
   end
 
   def create_book(attrs) do
-    %Book{} |> Book.changeset(attrs) |> Repo.insert!
+    %Book{} |> Book.changeset(attrs) |> Repo.insert
   end
 end

@@ -22,6 +22,8 @@ defmodule Storex.Store.Book do
   def validate_max_price(changeset) do
     if Decimal.cmp(get_change(changeset, :price), 100) == :gt do
       add_error(changeset, :price, "Price must be under 100")
+    else
+      changeset
     end
   end
 end
