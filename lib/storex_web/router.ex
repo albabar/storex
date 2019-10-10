@@ -24,6 +24,7 @@ defmodule StorexWeb.Router do
     resources "/cart", CartController, singleton: true, only: [:show, :create, :delete]
     resources "/user", UserController, only: [:new, :create]
     resources "/session", SessionController, singleton: true, only: [:new, :create, :delete]
+    resources "/checkout", CheckoutController, only: [:new, :create]
   end
 
   # Other scopes may use custom stacks.
