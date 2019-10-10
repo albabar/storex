@@ -8,6 +8,7 @@ defmodule StorexWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug StorexWeb.Plugs.FetchCart
+    plug StorexWeb.Plugs.CurrentUser
   end
 
   pipeline :api do
@@ -22,6 +23,7 @@ defmodule StorexWeb.Router do
     get "/books/:id", BookController, :show
     resources "/cart", CartController, singleton: true, only: [:show, :create, :delete]
     resources "/user", UserController, only: [:new, :create]
+    resources "/session", SessionController, singleton: true, only: [:new, :create, :delete]
   end
 
   # Other scopes may use custom stacks.

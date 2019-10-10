@@ -13,6 +13,13 @@
   <nav class="main-nav">
     <a class="main-nav__logo" href="/"></a>
     <ul class="main-nav__links">
+      <%= if @current_user do %>
+        <li><%= @current_user.name %></li>
+        <li><%= link "Log out", to: Routes.session_path(@conn, :delete), method: :delete %></li>
+      <% else %>
+        <li><%= link "Sign Up", to: Routes.user_path(@conn, :new) %></li>
+        <li><%= link "Sign In", to: Routes.session_path(@conn, :new) %></li>
+      <% end %>
       <%= if items_count(@conn) do %>
         <li>
           <%= link to: Routes.cart_path(@conn, :show) do %>
