@@ -13,4 +13,12 @@ defmodule Storex.Store do
   def create_book(attrs) do
     %Book{} |> Book.changeset(attrs) |> Repo.insert
   end
+
+  def change_book(book \\ %Book{}), do: Book.changeset(book, %{})
+
+  def update_book(book, attrs) do
+    book |> Book.changeset(attrs) |> Repo.update
+  end
+
+  def delete_book(book), do: book |> Repo.delete
 end

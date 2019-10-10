@@ -1,0 +1,5 @@
+<h1>New book</h1>
+<%= render "form.html",
+           changeset: @changeset,
+           action: Routes.book_path(@conn, :create),
+           label: "Create" %>

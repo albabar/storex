@@ -14,3 +14,8 @@
 </div>
 
 <%= link "Add to Cart", to: Routes.cart_path(@conn, :create, book_id: @book.id), method: :create, class: "button button-primary" %>
+<%= if @is_admin do %>
+  <%= link "Edit", to: Routes.book_path(@conn, :edit, @book), class: "button" %>
+  <%= link "Delete", to: Routes.book_path(@conn, :delete, @book),
+            method: :delete, data: [confirm: "Are you sure?"], class: "button button-danger" %>
+<% end %>

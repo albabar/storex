@@ -20,7 +20,7 @@ defmodule StorexWeb.Router do
 
 #    get "/", PageController, :index
     get "/", BookController, :index
-    get "/books/:id", BookController, :show
+    resources "/books", BookController
     resources "/cart", CartController, singleton: true, only: [:show, :create, :delete]
     resources "/user", UserController, only: [:new, :create]
     resources "/session", SessionController, singleton: true, only: [:new, :create, :delete]
