@@ -1,9 +1,9 @@
 defmodule Storex.SalesTest do
   use Storex.DataCase
-  alias Storex.{Store, Sales}
+  alias Storex.{Store, Sales, Accounts}
 
   describe "carts" do
-    alias Storex.Sales.Cart
+    alias Sales.Cart
 
     def book_fixture(attrs \\ %{}) do
       default_attrs = %{
@@ -100,6 +100,40 @@ defmodule Storex.SalesTest do
       Sales.add_book_to_cart(book1, cart)
 
       assert Sales.line_items_total_price(cart) == Decimal.new("177.00")
+    end
+  end
+
+  describe "orders" do
+    def user_fixture(attrs \\ %{}) do
+      default_attrs = %{
+        name: "Agdum Bagdum",
+        email: "agdum@bagdum.com",
+        password: "123456"
+      }
+
+      {:ok, user} = attrs |> Enum.into(default_attrs) |> Accounts.create_user
+      user
+    end
+
+    test "new_order/0 returns an empty changeset" do
+      assert %Ecto.Changeset{} = Sales.new_order
+    end
+
+    test "process_order/3 creates an order" do
+      user = user_fixture()
+      cart = cart_fixture()
+      book = book_fixture()
+
+      Sales.add_book_to_cart(book, cart)
+      Sales.add_book_to_cart(book, cart)
+
+      {:ok, order} = Sales.process_order(user, cart, %{address: "Ghoradum saje 69"})
+      [line_item] = order.line_items
+
+      assert order.user_id == user.id
+      assert order.address == "Ghoradum saje 69"
+      assert line_item.book_id == book.id
+      assert line_item.quantity == 2
     end
   end
 end
